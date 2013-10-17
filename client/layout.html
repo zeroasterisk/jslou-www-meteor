@@ -3,5 +3,17 @@
 </head>
 
 <body>
+
 </body>
+
+<template name="layout">
+{{> header}}
+<div class="container">
+  <!-- the main template will be rendered here -->
+  {{yield}}
+</div><!-- /.container -->
+{{> footer}}
+</template>
+
+
 
