@@ -1,0 +1,22 @@
+// Layout
+// ------------------
+
+body {
+  background: #f55a7c url(/img/bg-4-x.jpg) repeat-x top left;
+}
+
+
+// Header
+// ------------------
+
+
+// Main Container
+#outer-wrapper {
+  position: relative;
+}
+
+// Footer
+// ------------------
+
+
+//
