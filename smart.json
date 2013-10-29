@@ -1,6 +1,8 @@
 {
   "packages": {
     "bootstrap3-less": {},
-    "iron-router": {}
+    "iron-router": {},
+    "moment": {},
+    "bootstrap-growl": {}
   }
 }

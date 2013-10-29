@@ -5,7 +5,7 @@
  *
  */
 Router.configure({
-  layout: 'layout',
+  layoutTemplate: 'layout',
   notFoundTemplate: 'notFound',
   loadingTemplate: 'loading',
   renderTemplates: {
@@ -18,4 +18,15 @@ Router.configure({
 Router.map(function() {
   this.route('home', {path: '/'});
   this.route('aboutUs');
+  // Member moderation
+  // Member moderation
+  this.route('memberships', {path: '/memberships'});
+  this.route('membership', {
+    path: '/membership/:id',
+    data: function() { return Members.findOne( this.params.id ); }
+  });
+  this.route('user', {
+    path: '/user/:id',
+    data: function() { return Meteor.users.findOne( this.params.id ); }
+  });
 });

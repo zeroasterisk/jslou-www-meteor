@@ -2,6 +2,14 @@
 <footer>
   <div class="container">
     My footer, yo
+
+    {{#if isDevUser}}
+      {{#if isAdmin}}
+        ~ you're an admin
+      {{else}}
+        <a href="#devUserUpgrade" class="btn btn-xs btn-default devUserUpgrade">TEMP: Upgrade yourself to an Admin</a>
+      {{/if}}
+    {{/if}}
   </div>
 </footer>
 </template>

@@ -15,6 +15,17 @@
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li>{{loginButtons}}</li>
+        {{#if isMember}}
+          <li><a href="/member/">Member Profile</a></li>
+          {{#if isAdmin}}
+            <li><a href="/admin">Admin</a></li>
+          {{else}}
+            {{#if isModerator}}
+              <li><a href="/moderator">Moderator</a></li>
+            {{/if}}
+          {{/if}}
+        {{/if}}
       </ul>
     </div><!--/.nav-collapse -->
   </div>

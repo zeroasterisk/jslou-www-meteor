@@ -1,0 +1,63 @@
+<!--
+Admin / Moderator list of Memberships
+ * list of Users who are Members
+ * list of Users who have requested Membership
+ * list of Users who have requested Moderator status
+ * list of Users who have requested Admin status
+-->
+<template name="memberships">
+<h1>Memberships</h1>
+
+<table class="table table-brodered table-stripped">
+{{#each users}}
+<tr>
+  <td>
+    {{#if isModerator}}
+      <a href="/user/{{_id}}">{{profile.name}}</a>
+    {{else}}
+      {{profile.name}}
+    {{/if}}
+  </td>
+  <td>
+    {{#if isMember _id}}
+      <span class="label label-success">Member</span>
+      {{#if isModerator _id}}
+        <span class="label label-inverse">Moderator</span>
+      {{else}}
+        {{#if isModerator}}
+          <a href="#makeModerator" class="btn btn-primary btn-mini makeModerator">Make Moderator</a>
+        {{/if}}
+      {{/if}}
+      {{#if isAdmin _id}}
+        <span class="label label-info">Admin</span>
+      {{else}}
+        {{#if isAdmin}}
+          <a href="#makeAdmin" class="btn btn-primary btn-mini makeAdmin">Make Admin</a>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  </td>
+  <td>
+    {{#if profile.requestOpen}}
+      <span class="label label-default">
+        Requested: {{profile.requestPerm}}<br>
+        {{profile.requestedTimestamp}}<br>
+        {{profile.requestedResponse}}<br>
+      </span>
+    {{else}}
+      {{#if profile.requestDenied}}
+        <span class="label label-default">
+          Request Denied: <strong>{{profile.requestPerm}}</strong><br>
+          {{profile.requestedTimestamp}}<br>
+          {{profile.requestedResponse}}<br>
+        </span>
+      {{/if}}
+    {{/if}}
+  </td>
+  <td>
+  </td>
+</tr>
+{{/each}}
+</table>
+
+</template>

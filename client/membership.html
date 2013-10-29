@@ -1,0 +1,22 @@
+<!--
+Admin / Moderator view/edit page for a single Membership
+ * view basic Membership details
+ * toggle/edit Membership details
+-->
+<template name="memberships">
+<h1>Membership: {{User.profile.name}}</h1>
+
+<div class="alert alert-default">
+  {{User.profile.name}}
+  <a href="/user/{{User._id}}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+  <br>
+  ....
+</div>
+
+TODO:
+isPublic, isMember, isModerator, isAdmin
+
+TODO
+
+</template>
+

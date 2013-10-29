@@ -18,3 +18,6 @@ appcache
 browser-policy
 spiderable
 iron-router
+amplify
+moment
+bootstrap-growl
