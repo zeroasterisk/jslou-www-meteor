@@ -31,7 +31,7 @@
       if (!_.isString(userId) || String(userId).length < 5) {
         return false;
       }
-      return Members.is(userId);
+      return User.isMember(userId);
     });
     Handlebars.registerHelper('isModerator', function (userId) {
       if (_.isObject(userId)) {
@@ -43,7 +43,7 @@
       if (!_.isString(userId) || String(userId).length < 5) {
         return false;
       }
-      return Members.isModerator(userId);
+      return User.isModerator(userId);
     });
     Handlebars.registerHelper('isAdmin', function (userId) {
       if (_.isObject(userId)) {
@@ -55,7 +55,7 @@
       if (!_.isString(userId) || String(userId).length < 5) {
         return false;
       }
-      return Members.isAdmin(userId);
+      return User.isAdmin(userId);
     });
 
     // TEMP HACK -- need to remove before prod
@@ -69,7 +69,12 @@
       if (!_.isString(userId) || String(userId).length < 5) {
         return false;
       }
-      return true;
+      // dirty hackery
+      console.log('isDevUser', Meteor.user());
+      if (Session.get('dev')) {
+        return true;
+      }
+      return false;
     });
 
     // ---------------------------------

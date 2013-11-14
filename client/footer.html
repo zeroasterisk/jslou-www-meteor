@@ -1,15 +1,21 @@
 <template name="footer">
 <footer>
   <div class="container">
-    My footer, yo
-
-    {{#if isDevUser}}
-      {{#if isAdmin}}
-        ~ you're an admin
-      {{else}}
-        <a href="#devUserUpgrade" class="btn btn-xs btn-default devUserUpgrade">TEMP: Upgrade yourself to an Admin</a>
-      {{/if}}
-    {{/if}}
+    <div class="row">
+      <div class="loginButtons col-sm-3">
+        <a href="https://github.com/zeroasterisk/jslou-www-meteor" blank="_blank">CopyLeft</a>
+      </div>
+      <div class="loginButtons col-sm-3">{{loginButtons}}</div>
+      <div class="loginButtons col-sm-3">
+        {{#if isInRole 'admin'}}
+          <span class="label label-info" data-toggle="tooltip" title="Admins are cool">you're an admin</span>
+        {{else}}
+          {{#if isDevUser}}
+            <a href="#devUserUpgrade" class="btn btn-xs btn-default devUserUpgrade">TEMP: Upgrade yourself to an Admin</a>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
   </div>
 </footer>
 </template>

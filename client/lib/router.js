@@ -17,16 +17,21 @@ Router.configure({
 });
 Router.map(function() {
   this.route('home', {path: '/'});
-  this.route('aboutUs');
+  this.route('about');
+  this.route('contact');
   // Member moderation
-  // Member moderation
-  this.route('memberships', {path: '/memberships'});
+  // Member administration
+  this.route('users_index', {
+    // TODO: implement security here
+    path: '/admin/users',
+    data: function() { return Meteor.users.find( ); }
+  });
   this.route('membership', {
     path: '/membership/:id',
-    data: function() { return Members.findOne( this.params.id ); }
+    data: function() { return Meteor.users.findOne( this.params.id ); }
   });
   this.route('user', {
     path: '/user/:id',
-    data: function() { return Meteor.users.findOne( this.params.id ); }
+    data: function() { return Members.findOne( this.params.id ); }
   });
 });

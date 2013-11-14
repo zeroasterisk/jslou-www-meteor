@@ -1,0 +1,52 @@
+<template name="users_index">
+<h1>Users</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>User</th>
+    <th>Created</th>
+    <th>Member</th>
+    <th>Mod</th>
+    <th>Admin</th>
+  </tr>
+  {{#each users}}
+    <tr>
+      <td>
+        <strong>{{profile.name}}</strong>
+        <!-- TODO: build out a template for basic user details -->
+      </td>
+      <td>
+        {{profile.created}}
+      </td>
+      <td>
+        {{#if isMember _id}}
+          <span class="label label-success">Member</span>
+        {{else}}
+          {{#if isInRole 'moderator'}}
+            <a href="#makeMember" data-user-id="{{_id}}" class="btn btn-default btn-mini">Make Member</a>
+          {{/if}}
+        {{/if}}
+      </td>
+      <td>
+        {{#if isModerator _id}}
+          <span class="label label-success">Mod</span>
+        {{else}}
+          {{#if isInRole 'admin'}}
+            <a href="#makeModerator" data-user-id="{{_id}}" class="btn btn-default btn-mini">Make Mod</a>
+          {{/if}}
+        {{/if}}
+      </td>
+      <td>
+        {{#if isAdmin _id}}
+          <span class="label label-success">Admin</span>
+        {{else}}
+          {{#if isInRole 'admin'}}
+            <a href="#makeAdmin" data-user-id="{{_id}}" class="btn btn-default btn-mini">Make Admin</a>
+          {{/if}}
+        {{/if}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+</template>

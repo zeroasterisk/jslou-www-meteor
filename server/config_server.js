@@ -6,3 +6,11 @@
  * (security through obfuscation = not security)
  *
  */
+
+
+Meteor.startup(function () {
+  BrowserPolicy.content.allowInlineScripts();
+  BrowserPolicy.content.allowOriginForAll('netdna.bootstrapcdn.com');
+});
+
+

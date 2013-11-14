@@ -1,5 +1,5 @@
 /**
- * Server only Meteor Methods for Members/Membership/Admins
+ * Server only Meteor Methods for User/Membership/Admins
  */
 
 Meteor.methods({
@@ -21,25 +21,17 @@ Meteor.methods({
       console.log('makeMember:error:1');
       //throw new Meteor.Error(500, 'You can not make yourself a Member');
     }
-    if (Members.isModerator(Meteor.userId())) {
+    if (!User.isModerator(Meteor.userId())) {
       console.log('makeMember:error:2');
       throw new Meteor.Error(500, 'You can not grant access, you are not a Moderator');
     }
-    var member = Members.findOne({userId: userId});
-    console.log('makeMember:member', member);
+    var user = Meteor.users.findOne({_id: userId});
+    console.log('makeMember:user', user);
     if (!_.isObject(member)) {
-      member = {
-        userId: userId,
-        created: moment().format(),
-        isActive: true,
-        isMember: true
-      };
-      return Members.insert(member);
+      console.log('makeMember:error:3');
+      throw new Meteor.Error(500, 'You can not grant access, user not found');
     }
-    Members.update(member._id, {
-      $set: { isActive: true, isMember: true }
-    });
-    return member._id;
+    return Roles.addUsersToRoles(userId, ['member']);
   },
 
   /**
@@ -52,7 +44,24 @@ Meteor.methods({
    * @return boolean
    */
   makeModerator: function(userId) {
-    console.log('makeModerator', userId, Meteor.userId, Meteor.userId());
+    console.log('makeModerator', userId, Meteor.userId());
+    check(userId, String);
+    check(Meteor.userId(), String);
+    if (Meteor.userId() == userId) {
+      console.log('makeModerator:error:1');
+      //throw new Meteor.Error(403, 'You can not make yourself a Member');
+    }
+    if (!User.isAdmin(Meteor.userId())) {
+      console.log('makeModerator:error:2');
+      throw new Meteor.Error(403, 'You can not grant access, you are not an Admin');
+    }
+    var user = Meteor.users.findOne({_id: userId});
+    console.log('makeModerator:user', user);
+    if (!_.isObject(member)) {
+      console.log('makeModerator:error:3');
+      throw new Meteor.Error(500, 'You can not grant access, user not found');
+    }
+    return Roles.addUsersToRoles(userId, ['moderator']);
   },
 
   /**
@@ -66,6 +75,23 @@ Meteor.methods({
    */
   makeAdmin: function(userId) {
     console.log('makeAdmin', userId, Meteor.userId, Meteor.userId());
+    check(userId, String);
+    check(Meteor.userId(), String);
+    if (Meteor.userId() == userId) {
+      console.log('makeAdmin:error:1');
+      //throw new Meteor.Error(403, 'You can not make yourself a Member');
+    }
+    if (!User.isAdmin(Meteor.userId())) {
+      console.log('makeAdmin:error:2');
+      throw new Meteor.Error(403, 'You can not grant access, you are not an Admin');
+    }
+    var user = Meteor.users.findOne({_id: userId});
+    console.log('makeAdmin:user', user);
+    if (!_.isObject(member)) {
+      console.log('makeAdmin:error:3');
+      throw new Meteor.Error(500, 'You can not grant access, user not found');
+    }
+    return Roles.addUsersToRoles(userId, ['admin']);
   },
 
   /**
@@ -73,20 +99,10 @@ Meteor.methods({
    * forces a userId == admin
    */
   devUserUpgrade: function(userId) {
-    var member = Members.findOne({userId: userId});
-    if (_.isObject(member)) {
-      throw new Meteor.Error(500, 'devUserUpgrade only works on a new Member record');
-    }
-    member = {
-      userId: userId,
-      created: moment().format(),
-      isPublic: true,
-      isActive: true,
-      isMember: true,
-      isModerator: true,
-      isAdmin: true
-    };
-    return Members.insert(member);
+    console.log('devUserUpgrade', userId, Meteor.userId, Meteor.userId());
+    check(userId, String);
+    check(Meteor.userId(), String);
+    return Roles.addUsersToRoles(userId, ['admin']);
   }
 
 });
@@ -96,7 +112,7 @@ Meteor.methods({
  */
 Accounts.onCreateUser(function(options, user) {
   // notify Admins/Moderators?
-  user.created = moment().format()
+  user.created = moment().format();
   // We still want the default hook's 'profile' behavior.
   if (options.profile) {
     user.profile = options.profile;

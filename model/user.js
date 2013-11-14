@@ -1,11 +1,14 @@
 /**
  * Users are built into Meteor
- * This is a group of "Members" which can be linked to Users
- * This is how we grant "rights" to users, etc.
+ * We use 'meteor-roles' to control permissions on our Users
+ * @link https://github.com/alanning/meteor-roles
  *
+ * This is a convenience wrapper
+ *
+ * These are some extra tools we can use to determine User access,
+ * And to get extra stuff from our Users.role
  */
-
-Members = new Meteor.Collection('members');
+User = {};
 
 /**
  * Is a user a member?
@@ -13,9 +16,8 @@ Members = new Meteor.Collection('members');
  * @param object user
  * @return boolean
  */
-Members.is = function(user) {
-  found = Members.find({ userId: Members.userId(user), isMember: true });
-  return (found.count() == 1);
+User.isMember = function(user) {
+  return Roles.userIsInRole( User.user(user), ['admin', 'member']);
 }
 
 /**
@@ -24,9 +26,8 @@ Members.is = function(user) {
  * @param object user
  * @return boolean
  */
-Members.isModerator = function(user) {
-  found = Members.find({ userId: Members.userId(user), isModerator: true });
-  return (found.count() == 1);
+User.isModerator = function(user) {
+  return Roles.userIsInRole( User.user(user), ['admin', 'moderator']);
 }
 
 /**
@@ -35,9 +36,9 @@ Members.isModerator = function(user) {
  * @param object user
  * @return boolean
  */
-Members.isAdmin = function(user) {
-  found = Members.find({ userId: Members.userId(user), isAdmin: true });
-  return (found.count() == 1);
+User.isAdmin = function(user) {
+	console.log('User.isAdmin', User.user(user).fetch(), Roles.userIsInRole( User.user(user), ['admin']));
+  return Roles.userIsInRole( User.user(user), ['admin']);
 }
 
 /**
@@ -48,7 +49,7 @@ Members.isAdmin = function(user) {
  * @param mixed user or null
  * @return string userId or null
  */
-Members.userId = function(user) {
+User.userId = function(user) {
   if (Meteor.isServer) {
     // if we are on the server, we don't know who we are logged in as
     //   so we only use what was passed in, it should be a 'user'
@@ -78,4 +79,9 @@ Members.userId = function(user) {
   return null;
 };
 
-
+/**
+ * convenience wrapper for Meteor.users
+ */
+User.user = function(userId) {
+  return Meteor.users.find({ userId: User.userId(userId) });
+}
