@@ -10,7 +10,8 @@
 
 Meteor.startup(function () {
   BrowserPolicy.content.allowInlineScripts();
-  BrowserPolicy.content.allowOriginForAll('netdna.bootstrapcdn.com');
+  //BrowserPolicy.content.allowOriginForAll('netdna.bootstrapcdn.com');
+  //BrowserPolicy.content.allowOriginForAll('code.jquery.com');
 });
 
 

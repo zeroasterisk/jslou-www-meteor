@@ -21,7 +21,7 @@ Meteor.publish('member', function() {
     //console.log('publish member exit 2');
     return [];
   }
-  console.log('publish member GOOD');
+  //console.log('publish member GOOD');
   return [
     Meteor.users.find(),
     Posts.find({userId: this.userId}),

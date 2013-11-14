@@ -37,7 +37,7 @@ User.isModerator = function(user) {
  * @return boolean
  */
 User.isAdmin = function(user) {
-	console.log('User.isAdmin', User.user(user).fetch(), Roles.userIsInRole( User.user(user), ['admin']));
+	console.log('User.isAdmin', user, User.user(user), Roles.userIsInRole( User.user(user), ['admin']));
   return Roles.userIsInRole( User.user(user), ['admin']);
 }
 
@@ -83,5 +83,5 @@ User.userId = function(user) {
  * convenience wrapper for Meteor.users
  */
 User.user = function(userId) {
-  return Meteor.users.find({ userId: User.userId(userId) });
+  return Meteor.users.findOne(User.userId(userId));
 }
