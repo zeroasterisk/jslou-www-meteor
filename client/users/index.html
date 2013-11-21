@@ -3,20 +3,38 @@
 
 <table class="table table-striped table-borderd">
   <tr>
-    <th>User</th>
+    <th colspan="2">User</th>
+    <th>Details</th>
     <th>Created</th>
     <th>Member</th>
     <th>Mod</th>
     <th>Admin</th>
   </tr>
   {{#each users}}
+    <!-- TODO: build out a template for basic user details -->
     <tr>
-      <td>
-        <strong>{{profile.name}}</strong>
-        <!-- TODO: build out a template for basic user details -->
+      <td class="thumb">
+        {{#if services.google.picture}}
+          <img src="{{services.google.picture}}" alt="img: {{services.google.name}}" height="20">
+        {{/if}}
+        {{#if services.github.picture}}
+          <img src="{{services.github.picture}}" alt="img: {{services.github.name}}" height="20">
+        {{/if}}
       </td>
       <td>
-        {{profile.created}}
+        {{#if services.google.email}}
+          <span class="label label-default"><i class="fa fa-google-plus"></i> {{services.google.email}}</span><br>
+        {{/if}}
+        {{#if services.github.email}}
+          <span class="label label-default"><i class="fa fa-github"></i>
+            <a href="https://github.com/{{services.github.username}}" target="_blank">
+              {{services.github.email}}
+            </a>
+          </span><br>
+        {{/if}}
+      </td>
+      <td>
+        <strong>{{profile.name}}</strong>
       </td>
       <td>
         {{#if isMember _id}}
