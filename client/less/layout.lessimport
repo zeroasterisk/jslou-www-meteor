@@ -2,7 +2,7 @@
 // ------------------
 
 body {
-  background: #f55a7c url(/img/bg-4-x.jpg) repeat-x top left;
+  background: rgba(25,25,25, 1);
 }
 
 
@@ -21,5 +21,19 @@ footer {
   margin: 20px auto 0 auto;
   padding: 15px 0 30px 0;
   border-top: 1px solid #666;
+}
+
+
+.announcements{
+  font-weight: 100;
+  text-align: center;
+  background: rgba(0,0,0, .3);
+  -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+     -o-border-radius: 4px;
+        border-radius: 4px;
+        color: white;
+        padding: 15px;
 }
 
