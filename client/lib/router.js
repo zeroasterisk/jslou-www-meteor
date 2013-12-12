@@ -16,7 +16,10 @@ Router.configure({
   }
 });
 Router.map(function() {
-  this.route('home', {path: '/'});
+  this.route('home', {
+    path: '/',
+    data: { isHome: true }
+  });
   this.route('about');
   this.route('contact');
   // Member moderation
@@ -36,10 +39,12 @@ Router.map(function() {
   });
   this.route('posts_admin_editor', {
     path: '/admin/posts/:id',
-    data: function() { return Posts.findOne( this.params.id ); }
-  });
-  this.route('posts_admin_editor', {
-    path: '/admin/posts/new'
+    data: function() {
+      if (this.params.id == 'new') {
+        return {};
+      }
+      return Posts.findOne( this.params.id );
+    }
   });
   this.route('posts_admin_index', {
     path: '/admin/posts',
