@@ -5,24 +5,30 @@
       "bootstrap3-less": {},
       "iron-router": {},
       "moment": {},
+      "marked": {},
       "bootstrap-growl": {},
       "roles": {}
     },
     "packages": {
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
-        "tag": "v0.1.4",
-        "commit": "23ec918f8377b15b22cba33e13b717214235c88a"
+        "tag": "v0.1.8",
+        "commit": "48b6db4435d9f01a1fcfe694a180b38e8e38835b"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.1",
-        "commit": "4e1ee0581d68bff422a915dacb0bd30eae10fe08"
+        "tag": "v0.6.2",
+        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.2.1",
         "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+      },
+      "marked": {
+        "git": "https://github.com/chuangbo/meteor-marked.git",
+        "tag": "v0.2.9",
+        "commit": "6485d6f03841501f81176e34ab375840473aa714"
       },
       "bootstrap-growl": {
         "git": "https://github.com/TimHeckel/meteor-bootstrap-growl.git",
@@ -31,8 +37,8 @@
       },
       "roles": {
         "git": "https://github.com/alanning/meteor-roles.git",
-        "tag": "v1.0.6",
-        "commit": "f81cbf7c765a4ed7e16a580c288db6f10a90856b"
+        "tag": "v1.2.6",
+        "commit": "f2a9058281f8f2fe028767841d7445aadd6893cf"
       }
     }
   }

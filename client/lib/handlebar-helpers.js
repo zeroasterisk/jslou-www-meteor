@@ -85,6 +85,10 @@
       return moment(timestamp).format('MMMM Do YYYY, h:mm:ss a');
     });
 
+    Handlebars.registerHelper('niceDate', function (timestamp) {
+      return moment(timestamp).format('MMMM Do YYYY');
+    });
+
     Handlebars.registerHelper('getSession', function (key) {
       return Session.get(key);
     });
