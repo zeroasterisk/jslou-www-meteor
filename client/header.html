@@ -1,5 +1,6 @@
 <template name="header">
-<header>
+
+
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation" id="nav-0">
   <div class="container">
     <div class="navbar-header">
@@ -35,9 +36,12 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
+
+
+
 {{#if isHome}}
   {{> bannerHomepage}}
-{else }}
+{{else }}
   {{> bannerGeneral}}
 {{/if}}
 

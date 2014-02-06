@@ -1,26 +1,75 @@
+@jslou-red: #c5202c;
+@not-quite-black: rgba(25,25,25, 1);
+
+* {-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
 // Layout
 // ------------------
 
 body {
-  background: rgba(25,25,25, 1);
+  background: @not-quite-black;
 }
 
 
 // Header
 // ------------------
+.site-header{
+  margin: 0 auto; 
+  width: 90%;
+   &:after{
+    clear: both;
+    display: table;
+    content:"";
+    }
+}
 
+.logo{
+  width: 378px;
+  height: 250px;
+  background: url("/img/jslou-logo.png");
+  background-size: 378px 250px;
+  text-indent: -999px;
+}
 
-// Main Container
-#outer-wrapper {
-  position: relative;
+.logo-small{
+  width: 227px;
+  height: 150px;
+  background: url("/img/jslou-logo-small.png");
+  background-size: 227px 150px;
+  text-indent: -999px;
+}
+
+/*   Main Container  */
+
+.container{
+//border: 1px solid red;
+position: relative;
+width: 90%;
+margin: 0 auto;
+
+}
+
+.content{
+  display: block !important;
+  //border: 1px solid blue;
 }
 
 // Footer
 // ------------------
 footer {
+  background: @jslou-red;
+  color: white;
   margin: 20px auto 0 auto;
   padding: 15px 0 30px 0;
   border-top: 1px solid #666;
+  a{
+    color: white;
+    &:hover{
+
+    }
+  }
 }
 
 
