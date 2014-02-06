@@ -37,6 +37,18 @@ Router.map(function() {
     path: '/user/:id',
     data: function() { return Meteor.users.findOne( this.params.id ); }
   });
+  this.route('posts', {
+    path: '/posts/',
+    data: function() {
+      return { posts: Posts.find() };
+    }
+  });
+  this.route('post', {
+    path: '/posts/:id/:slug',
+    data: function() {
+      return Posts.findOne( this.params.id );
+    }
+  });
   this.route('posts_admin_editor', {
     path: '/admin/posts/:id',
     data: function() {

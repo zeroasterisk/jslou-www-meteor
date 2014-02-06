@@ -3,6 +3,7 @@
     "bootstrap3-less": {},
     "iron-router": {},
     "moment": {},
+    "marked": {},
     "bootstrap-growl": {},
     "roles": {}
   }

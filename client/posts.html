@@ -1,0 +1,25 @@
+<template name="posts">
+<h1>Posts</h1>
+{{#each posts}}
+  <div class="post">
+    <h3><a href="/posts/{{_id}}/{{slug}}">{{name}}</a></h3>
+    <p>{{short}}</p>
+  </div>
+{{/each}}
+</template>
+
+<template name="post">
+<h1>{{name}}</h1>
+<div class="panel">
+  <small>{{niceDate date}}</small>
+  {{#if isInRole 'admin'}}
+    <a class="btn btn-info btn-mini" href="/admin/posts/{{_id}}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+  {{/if}}
+</div>
+<p class="alert alert-default">{{short}}</p>
+<div class="post-body">
+  {{#markdown}}{{{body}}}{{/markdown}}
+</div>
+</template>
+
+
