@@ -5,6 +5,9 @@
     "moment": {},
     "marked": {},
     "bootstrap-growl": {},
-    "roles": {}
+    "roles": {},
+    "sp-epic-editor": {},
+    "filepicker": {},
+    "impicker": {}
   }
 }

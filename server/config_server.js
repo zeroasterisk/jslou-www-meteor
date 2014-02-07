@@ -15,6 +15,9 @@ Meteor.startup(function () {
   BrowserPolicy.content.allowOriginForAll('*.google.com');
   BrowserPolicy.content.allowOriginForAll('*.googleusercontent.com');
   BrowserPolicy.content.allowOriginForAll('*.amazonaws.com');
+  BrowserPolicy.content.allowOriginForAll('*.filepicker.io');
+  BrowserPolicy.content.allowOriginForAll('*.filepicker.com');
+  BrowserPolicy.content.allowOriginForAll('http://api.filepicker.io');
 });
 
 
