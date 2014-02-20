@@ -7,7 +7,10 @@
       "moment": {},
       "marked": {},
       "bootstrap-growl": {},
-      "roles": {}
+      "roles": {},
+      "sp-epic-editor": {},
+      "filepicker": {},
+      "impicker": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -22,8 +25,8 @@
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.2.1",
-        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
       },
       "marked": {
         "git": "https://github.com/chuangbo/meteor-marked.git",
@@ -39,6 +42,21 @@
         "git": "https://github.com/alanning/meteor-roles.git",
         "tag": "v1.2.6",
         "commit": "f2a9058281f8f2fe028767841d7445aadd6893cf"
+      },
+      "sp-epic-editor": {
+        "git": "https://bitbucket.org/parhelium/sp-epic-editor",
+        "tag": "v0.0.3",
+        "commit": "1de330c49a955411d40647bdfdf6a3625c7447e6"
+      },
+      "filepicker": {
+        "git": "https://github.com/Ink/meteor.git",
+        "tag": "v0.4.0",
+        "commit": "20d56aaaf48be3a5c0499547a495a6463b4fa3d9"
+      },
+      "impicker": {
+        "git": "https://github.com/wulx/impicker.git",
+        "tag": "v1.1.2",
+        "commit": "26f1b4a6ed8f90762c699ad845264ff1065e8ebb"
       }
     }
   }
