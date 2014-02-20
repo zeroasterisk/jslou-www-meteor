@@ -2,11 +2,11 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="loginButtons col-sm-3">
+      <div class="footerText col-sm-9">
         <a href="https://github.com/zeroasterisk/jslou-www-meteor" blank="_blank">CopyLeft</a>
       </div>
-      <div class="loginButtons col-sm-3">{{loginButtons}}</div>
       <div class="loginButtons col-sm-3">
+        {{loginButtons}}
         {{#if isInRole 'admin'}}
           <span class="label label-info" data-toggle="tooltip" title="Admins are cool">you're an admin</span>
         {{else}}
