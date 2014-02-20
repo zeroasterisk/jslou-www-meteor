@@ -70,7 +70,7 @@ casper.test.begin('CasperJS:Posts', 5, function suite(test) {
     var status = this.evaluate(function() {
       return Meteor.status().status;
     });
-    this.echo('Meteor status is' + status);
+    this.echo('Meteor status is ' + status);
     this.exit();
   });
   /* -sign up- */
@@ -87,8 +87,8 @@ casper.test.begin('CasperJS:Posts', 5, function suite(test) {
 
     /* -- if we had a form... :/ --
     this.fillSelectors('form[action="/users/login"]', {
-      '#login-email': 'demoADAdmin@AlliedHealthMedia.com',
-      '#login-password': 'billrocks'
+      '#login-email': 'xxxx',
+      '#login-password': 'xxx'
     }, true);
     */
     var now = new Date();
@@ -111,7 +111,6 @@ casper.test.begin('CasperJS:Posts', 5, function suite(test) {
   }, function then() {
     init.snapshot(this);
     test.assertExists('#login-name-link', 'logged-in-link is found');
-    init.snapshot(this);
   }, function timeout() {
     this.capture('../casperjs/timeout.png');
     this.echo('TIMEOUT loading add user form');
