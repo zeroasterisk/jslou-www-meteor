@@ -1,5 +1,8 @@
 # JSLou Website
 
+> **⚠️ Personal Hobby Project** — This is an independent, personal project by [Alan Blount](https://github.com/zeroasterisk). It is **not affiliated with, endorsed by, or supported by any employer, company, or organization**. No warranty; use at your own risk.
+
+
 This is a MeteorJS application to run the [jslou.org](http://jslou.org).
 
 ## Setup a New Machine
