@@ -15,13 +15,13 @@
     "packages": {
       "bootstrap3-less": {
         "git": "https://github.com/eprochasson/bootstrap3-less",
-        "tag": "v0.1.8",
-        "commit": "48b6db4435d9f01a1fcfe694a180b38e8e38835b"
+        "tag": "v0.1.9",
+        "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.2",
-        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+        "tag": "v0.6.4",
+        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
@@ -30,8 +30,8 @@
       },
       "marked": {
         "git": "https://github.com/chuangbo/meteor-marked.git",
-        "tag": "v0.2.9",
-        "commit": "6485d6f03841501f81176e34ab375840473aa714"
+        "tag": "v0.3.1",
+        "commit": "3d9a9c94793b20e1ee7c807931cb536010d6f820"
       },
       "bootstrap-growl": {
         "git": "https://github.com/TimHeckel/meteor-bootstrap-growl.git",
@@ -55,8 +55,8 @@
       },
       "impicker": {
         "git": "https://github.com/wulx/impicker.git",
-        "tag": "v1.1.2",
-        "commit": "26f1b4a6ed8f90762c699ad845264ff1065e8ebb"
+        "tag": "v1.2.0",
+        "commit": "29a7a52d27b2cf8447fc24946b0fdbf60c4b12a6"
       }
     }
   }
