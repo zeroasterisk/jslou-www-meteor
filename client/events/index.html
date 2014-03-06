@@ -1,0 +1,10 @@
+<template name="events">
+<h1>Events</h1>
+{{#each calevents}}
+  <div class="event">
+    <h3><a href="/events/{{_id}}/{{slug}}">{{name}}</a></h3>
+    <p>{{short}}</p>
+  </div>
+{{/each}}
+
+</template>
