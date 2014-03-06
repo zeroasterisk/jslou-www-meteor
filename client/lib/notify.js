@@ -49,6 +49,10 @@ Notify = {
       Notify.error(error.message);
       return false;
     }
+    if (_.isString(results) && results.match(/^[0-9a-zA-Z]{15,24}$/)) {
+      Notify.success('Saved');
+      return true;
+    }
     if (_.isBoolean(results)) {
       Notify.success('Success');
       return true;

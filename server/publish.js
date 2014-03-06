@@ -22,6 +22,11 @@ Meteor.publish('public', function() {
 // TODO: build out a "full calender" display
 Meteor.publish('events', function() {
   return [
+    Events.find({})
+  ];
+});
+Meteor.publish('posts', function() {
+  return [
     Events.find({isPublic: true})
   ];
 });
@@ -30,10 +35,12 @@ Meteor.publish('events', function() {
 // -- public - page/id specific (single record)
 // ----------------------------
 Meteor.publish('event', function(id) {
-  return [ Events.findOne(id) ];
+  console.log('publish:event', id, Events.find({ _id: id }).fetch());
+  return [ Events.find({ _id: id }) ];
 });
+
 Meteor.publish('post', function(id) {
-  return [ Posts.findOne(id) ];
+  return [ Posts.find({ _id: id }) ];
 });
 
 // ----------------------------

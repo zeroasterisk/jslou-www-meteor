@@ -1,24 +1,27 @@
 <template name="events_admin_index">
 <h1>
-  events
+  Events
   <small><a href="/admin/events/new" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> New</a></small>
 </h1>
-<table class="table table-bordered table-striped">
+<ul class="list-group">
   {{#each calevents}}
-  <tr>
-    <td>
-      <a href="/admin/events/{{_id}}"><i class="glyphicon glyphicon-edit"></i></a>
-    </td>
-    <td>
-      <strong>{{title}}</strong>
-    </td>
-    <td>
-      {{date}}
-    </td>
-    <td>
-      {{preview}}
-    </td>
-  </tr>
+  <li class="list-group-item">
+    <div>
+      <a href="/admin/events/{{_id}}"><i class="glyphicon glyphicon-edit"></i>
+        <strong>
+          <!-- TODO: build out helper to display nice date range (handlebar-helpers.js) -->
+          {{niceTimestamp date}}
+        </strong>
+      </a>
+      &nbsp; &nbsp;
+      <em>
+        {{name}}
+      </em>
+    </div>
+    <div class="muted col-sm-offset-1">
+      {{#markdown}}{{{short}}}{{/markdown}}
+    </div>
+  </li>
   {{/each}}
-</table>
+</ul>
 </template>

@@ -12,7 +12,8 @@
       "filepicker": {},
       "impicker": {},
       "nprogress": {},
-      "fullcalendar": {}
+      "fullcalendar": {},
+      "handlebar-helpers": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -69,6 +70,11 @@
         "git": "https://github.com/TimHeckel/meteor-fullcalendar.git",
         "tag": "v1.6.1",
         "commit": "78dba7c564bf7baacf6556c70a3cc179d0e137c4"
+      },
+      "handlebar-helpers": {
+        "git": "https://github.com/raix/Meteor-handlebar-helpers.git",
+        "tag": "v0.0.9",
+        "commit": "71e94c99462b8801a34c5363510758b6ff5f5ac7"
       },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",

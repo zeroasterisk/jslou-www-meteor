@@ -88,11 +88,13 @@
     Handlebars.registerHelper('niceDate', function (timestamp) {
       return moment(timestamp).format('MMMM Do YYYY');
     });
-
+    Handlebars.registerHelper('isEquals', function (a, b) {
+      return (String(a) == String(b));
+    });
+    /* -- no longer needed - use: https://github.com/raix/Meteor-handlebar-helpers
     Handlebars.registerHelper('getSession', function (key) {
       return Session.get(key);
     });
-
     Handlebars.registerHelper('sessionEquals', function (key, value) {
       var myValue = Session.get(key); //Workaround Issue #617
       if (typeof(myValue) === 'boolean') {
@@ -150,5 +152,6 @@
         return options.fn(item);
       }).join('');
     });
+   */
   }
 }());

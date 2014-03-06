@@ -58,7 +58,7 @@ Router.map(function() {
     path: '/posts/',
     before: [
       function () {
-        this.subscribe('post', this.params._id).wait();
+        this.subscribe('post', this.params.id).wait();
       },
       Router.BeforeWait
     ],
@@ -72,7 +72,7 @@ Router.map(function() {
     path: '/posts/:id/:slug',
     before: [
       function () {
-        this.subscribe('post', this.params._id).wait();
+        this.subscribe('post', this.params.id).wait();
         this.subscribe('posts'); // don't wait
       },
       Router.BeforeWait
@@ -87,7 +87,7 @@ Router.map(function() {
     path: '/admin/posts/:id',
     before: [
       function () {
-        this.subscribe('post', this.params._id).wait();
+        this.subscribe('post', this.params.id).wait();
         this.subscribe('posts'); // don't wait
       },
       Router.BeforeWait
@@ -95,19 +95,30 @@ Router.map(function() {
     data: function() {
       if (this.params.id == 'new') {
         return {
-          post: {}
+          post: {
+          }
         };
       }
       return {
         post: Posts.findOne( this.params.id )
       }
-      /*
     },
     action: function() {
-      var params = this.params;
       var hash = this.params.hash;
       var isFirstRun = this.isFirstRun;
-      */
+      if (hash == 'delete' && this.params.id) {
+        window.location.hash = '';
+        if (confirm("Are you sure you want to delete this Post?")) {
+          Posts.remove(this.params.id, function(error, results) {
+            if (error) {
+              return Notify.callback(error, results);
+            }
+            Notify.success('Deleted');
+            Router.go('/admin/posts/');
+          });
+        }
+      }
+      this.render();
     }
   });
   this.route('posts_admin_index', {
@@ -125,7 +136,7 @@ Router.map(function() {
     path: '/events/',
     before: [
       function () {
-        this.subscribe('event', this.params._id).wait();
+        this.subscribe('events');
       },
       Router.BeforeWait
     ],
@@ -139,10 +150,17 @@ Router.map(function() {
     path: '/events/:id/:slug',
     before: [
       function () {
-        this.subscribe('event', this.params._id).wait();
-        this.subscribe('events'); // don't wait
+        this.subscribe('event', this.params.id).wait();
+        this.subscribe('events');
       },
-      Router.BeforeWait
+      function() {
+        if (this.ready()) {
+          NProgress.done();
+        } else {
+          NProgress.start();
+          this.stop();
+        }
+      }
     ],
     data: function() {
       return {
@@ -154,32 +172,64 @@ Router.map(function() {
     path: '/admin/events/:id',
     before: [
       function () {
-        this.subscribe('event', this.params._id).wait();
+        this.subscribe('event', this.params.id).wait();
         this.subscribe('events'); // don't wait
       },
-      Router.BeforeWait
+      function() {
+        if (this.ready()) {
+          NProgress.done();
+        } else {
+          NProgress.start();
+          this.stop();
+        }
+      }
     ],
     data: function() {
-      console.log('router: events_admin_editor', this.params);
       if (this.params.id == 'new') {
         return {
-          calevent: { id: 'new' }
+          calevent: {
+            name: 'JsLou Event ...',
+            type: 'range',
+            start: moment().add('days', 7).hour(18).minute(00).seconds(00).format('YYYY-MM-DD HH:mm'),
+            stop: moment().add('days', 7).hour(20).minute(00).seconds(00).format('YYYY-MM-DD HH:mm')
+          }
         };
       }
-      return {
-        calevent: Events.find({ _id: this.params.id })
-      }
-      /*
+      return { calevent: Events.findOne(this.params.id) }
     },
     action: function() {
-      var params = this.params;
       var hash = this.params.hash;
       var isFirstRun = this.isFirstRun;
-      */
+      if (hash == 'delete' && this.params.id) {
+        window.location.hash = '';
+        if (confirm("Are you sure you want to delete this Event?")) {
+          Events.remove(this.params.id, function(error, results) {
+            if (error) {
+              return Notify.callback(error, results);
+            }
+            Notify.success('Deleted');
+            Router.go('/admin/events/');
+          });
+        }
+      }
+      this.render();
     }
   });
   this.route('events_admin_index', {
     path: '/admin/events',
+    before: [
+      function () {
+        this.subscribe('events'); // don't wait
+      },
+      function() {
+        if (this.ready()) {
+          NProgress.done();
+        } else {
+          NProgress.start();
+          this.stop();
+        }
+      }
+    ],
     data: function() {
       return {
         calevents: Events.find( )
@@ -193,6 +243,6 @@ Router.BeforeWait = function() {
     NProgress.done();
   } else {
     NProgress.start();
-    this.stop(); // stop downstream funcs from running
+    this.stop();
   }
 };

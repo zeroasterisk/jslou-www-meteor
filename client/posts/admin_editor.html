@@ -1,14 +1,24 @@
 <template name="posts_admin_editor">
-  <h1>
-    Post Editor
-    <small><a href="/admin/posts/"><i class="glyphicon glyphicon-arrow-left"></i> back to all Posts</a></small>
-  </h1>
+  <div class="row">
+    <div class="col-sm-8">
+      <h1>
+        Post Editor
+      </h1>
+    </div>
+    <div class="col-sm-4 text-right">
+      <small><a href="/admin/posts/"><i class="glyphicon glyphicon-arrow-left"></i> back to all Posts</a></small>
+      <br>
+      {{#if post._id}}
+        <span class="label label-default">Editing</span>
+        <br>
+        <small><a href="#delete"><i class="glyphicon glyphicon-remove"></i> Delete Post</a></small>
+      {{else}}
+        <span class="label label-info">Adding New Record</span>
+      {{/if}}
+    </div>
+  </div>
+
   {{#with post}}
-  <p>
-    TODO:
-      [left] = markdown editor
-      [right] = live preview
-  </p>
 
   <form role="form" action="?" data-id="{{_id}}">
     <div class="form-horizontal">
@@ -42,25 +52,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-6 text-center muted">
-        Editor
-      </div>
-      <div class="col-sm-6 text-center muted">
-        Preview
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6 ME-left">
-        <textarea id="MEbody" class="ME-textarea">{{body}}</textarea>
-      </div>
-      <div class="col-sm-6 ME-right">
-        <div id="MEpreview" class="ME-preview">
-          {{#markdown}}{{{preview}}}{{/markdown}}
-        </div>
-      </div>
-    </div>
+    {{>editor}}
 
     <div class="row">
       <div class="col-sm-5">

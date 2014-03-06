@@ -10,6 +10,7 @@
     "filepicker": {},
     "impicker": {},
     "nprogress": {},
-    "fullcalendar": {}
+    "fullcalendar": {},
+    "handlebar-helpers": {}
   }
 }

@@ -1,0 +1,40 @@
+<template name="editor">
+    <div class="row">
+      <div class="col-sm-6 text-center muted">
+        <strong>Short</strong> Editor <em><small>(markdown)</small></em>
+      </div>
+      <div class="col-sm-6 text-center muted">
+        Preview
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 ME-left">
+        <textarea name="short" id="short" class="ME-textarea ME-short">{{short}}</textarea>
+      </div>
+      <div class="col-sm-6 ME-right">
+        <div id="short-preview" class="ME-preview ME-short">
+          {{#markdown}}{{{previewShort}}}{{/markdown}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 text-center muted">
+        <strong>Body</strong> Editor <em><small>(markdown)</small></em>
+      </div>
+      <div class="col-sm-6 text-center muted">
+        Preview
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 ME-left">
+        <textarea name="body" id="body" class="ME-textarea">{{body}}</textarea>
+      </div>
+      <div class="col-sm-6 ME-right">
+        <div id="body-preview" class="ME-preview">
+          {{#markdown}}{{{previewBody}}}{{/markdown}}
+        </div>
+      </div>
+    </div>
+
+</template>
+

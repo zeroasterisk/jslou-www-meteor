@@ -8,33 +8,31 @@
  *   http://epiceditor.com/ (this is a far second choice)
  */
 Template.posts_admin_editor.helpers({
-  preview: function() {
-    return Session.get('MEbody');
-  }
 });
 Template.posts_admin_editor.events({
   'submit form': function(e) {
     var id = $(e.target).data('id');
-    console.log('submit', id, $(e.target).serialize());
-    Posts.update(id, $(e.target).serialize());
+    e.preventDefault();
+    var id = $(e.target).data('id');
+    var data = {};
+    $.each($(e.target).serializeArray(), function() {
+      data[this.name] = this.value;
+    });
+    if (id.length) {
+      console.log('submit:update', id, data);
+      Posts.update(id, data, Template.posts_admin_editor.saveCallback);
+    } else {
+      console.log('submit:insert', id, data);
+      Posts.insert(data, Template.posts_admin_editor.saveCallback);
+    }
     return false;
-  },
-  'keyup #MEbody': function(e) {
-    Session.set('MEbody', $(e.target).val());
   }
 });
-Template.posts_admin_editor.rendered = function() {
-    if ($('#MEbody').val() == '') {
-      $('#MEbody').val( Session.get('MEbody') );
-    }
-  // Marked options
-  marked.setOptions({
-    langPrefix: '',
-    breaks: true,
-    gfm: true,
-    highlight: function(code) {
-      return hljs.highlightAuto(code).value;
-    }
-  });
-};
+Template.posts_admin_editor.saveCallback = function(error, results) {
+  if (error) {
+    return Notify.callback(error, results);
+  }
+  Notify.success('Saved');
+  Router.go('/admin/posts/' + results);
+}
 

@@ -8,33 +8,56 @@
  *   http://epiceditor.com/ (this is a far second choice)
  */
 Template.events_admin_editor.helpers({
-  preview: function() {
-    return Session.get('MEbody');
-  }
 });
 Template.events_admin_editor.events({
-  'submit form': function(e) {
-    var id = $(e.target).data('id');
-    console.log('submit', id, $(e.target).serialize());
-    Events.update(id, $(e.target).serialize());
-    return false;
+  'change input[name="type"]': function(e) {
+    Session.set('type', $(e.target).val());
   },
-  'keyup #MEbody': function(e) {
-    Session.set('MEbody', $(e.target).val());
+  'change input[name="slug"]': function(e) {
+    $(e.target).addClass('custom');
+  },
+  'keyup input[name="name"], change input[name="name"]': function(e) {
+    if ($('#slug').hasClass('custom')) {
+      return;
+    }
+    var slug = $(e.target).val();
+    slug = slug.toLowerCase();
+    slug = slug.replace(/[^a-z0-9]/g, '-');
+    slug = slug.replace(/\-\-+/g, '-');
+    slug = slug.replace(/(^\-|\-$)/g, '');
+    $('#slug').val(slug);
+  },
+  'submit form': function(e) {
+    e.preventDefault();
+    var id = $(e.target).data('id');
+    var data = {};
+    $.each($(e.target).serializeArray(), function() {
+      data[this.name] = this.value;
+    });
+    if (data.type == 'allday') {
+      data.date = moment.utc(data.date).toDate();
+      data.epoch = moment.utc(data.date).unix();
+    } else {
+      data.date = moment.utc(data.start).toDate();
+      data.start = moment.utc(data.start).toDate();
+      data.stop = moment.utc(data.stop).toDate();
+      data.epoch = moment.utc(data.date).unix();
+    }
+    if (id.length) {
+      console.log('submit:update', id, data);
+      Events.update(id, data, Template.events_admin_editor.saveCallback);
+    } else {
+      console.log('submit:insert', id, data);
+      Events.insert(data, Template.events_admin_editor.saveCallback);
+    }
+    return false;
   }
 });
-Template.events_admin_editor.rendered = function() {
-    if ($('#MEbody').val() == '') {
-      $('#MEbody').val( Session.get('MEbody') );
-    }
-  // Marked options
-  marked.setOptions({
-    langPrefix: '',
-    breaks: true,
-    gfm: true,
-    highlight: function(code) {
-      return hljs.highlightAuto(code).value;
-    }
-  });
-};
+Template.events_admin_editor.saveCallback = function(error, results) {
+  if (error) {
+    return Notify.callback(error, results);
+  }
+  Notify.success('Saved');
+  Router.go('/admin/events/' + results);
+}
 

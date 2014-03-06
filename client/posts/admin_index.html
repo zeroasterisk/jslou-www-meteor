@@ -3,22 +3,27 @@
 	Posts
 	<small><a href="/admin/posts/new" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> New</a></small>
 </h1>
-<table class="table table-bordered table-striped">
-	{{#each posts}}
-		<tr>
-			<td>
-				<a href="/admin/posts/{{_id}}"><i class="glyphicon glyphicon-edit"></i></a>
-			</td>
-			<td>
-				<strong>{{title}}</strong>
-			</td>
-			<td>
-				{{date}}
-			</td>
-			<td>
-				{{preview}}
-			</td>
-		</tr>
-	{{/each}}
-</table>
+<ul class="list-group">
+  {{#each posts}}
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-xs-8">
+        <a href="/admin/posts/{{_id}}"><i class="glyphicon glyphicon-edit"></i>
+          <strong>
+            {{name}}
+          </strong>
+        </a>
+      </div>
+      <div class="col-xs-4 text-right">
+        <em class="label label-default">
+          {{date}}
+        </em>
+      </div>
+    </div>
+    <div class="muted col-sm-offset-1">
+      {{#markdown}}{{{short}}}{{/markdown}}
+    </div>
+  </li>
+  {{/each}}
+</ul>
 </template>

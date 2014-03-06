@@ -1,13 +1,23 @@
 <template name="events_admin_editor">
-  <h1>
-    Event Editor
-    <small><a href="/admin/events/"><i class="glyphicon glyphicon-arrow-left"></i> back to all Events</a></small>
-  </h1>
-  {{#if calevent}}
-    good
-    {{else}}
-    bad
-    {{/if}}
+  <div class="row">
+    <div class="col-sm-8">
+      <h1>
+        Event Editor
+      </h1>
+    </div>
+    <div class="col-sm-4 text-right">
+      <small><a href="/admin/events/"><i class="glyphicon glyphicon-arrow-left"></i> back to all Events</a></small>
+      <br>
+      {{#if calevent._id}}
+        <span class="label label-default">Editing</span>
+        <br>
+        <small><a href="#delete"><i class="glyphicon glyphicon-remove"></i> Delete Event</a></small>
+      {{else}}
+        <span class="label label-info">Adding New Record</span>
+      {{/if}}
+    </div>
+  </div>
+
   {{#with calevent}}
 
   <form role="form" action="?" data-id="{{_id}}">
@@ -15,26 +25,52 @@
       <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-          <input type="text" max="64" min="8" required="required" class="form-control" id="name" placeholder="Enter Name" value="{{name}}">
+          <input type="text" max="64" min="8" required="required" class="form-control" name="name" id="name" placeholder="Enter Name" value="{{name}}">
         </div>
       </div>
       <div class="form-group">
         <label for="slug" class="col-sm-2 control-label">Slug</label>
         <div class="col-sm-10">
-          <input type="text" max="36" min="8" required="required" class="form-control" id="slug" placeholder="url-slug-for-seo" value="{{slug}}">
+          <input type="text" max="36" min="8" required="required" class="form-control {{#if slug}} custom {{/if}}" name="slug" id="slug" placeholder="url-slug-for-seo" value="{{slug}}">
           <p class="help-block">SEO: lower case, no spaces, <em>[a-z-]</em></p>
         </div>
       </div>
       <div class="form-group">
         <label for="date" class="col-sm-2 control-label">Date</label>
-        <div class="col-sm-4">
-          <input type="date" class="form-control" id="date" placeholder="YYYY-mm-dd" value="{{date}}" min="2010-01-01">
+        <div class="col-sm-10">
+          <div class="radio-group">
+            <label class="radio-inline">
+              <input id="typeRange" name="type" type="radio" class="radio" value="range" {{isChecked type 'range'}}>
+              Start - Stop (range)
+            </label>
+            <label class="radio-inline">
+              <input id="typeAllday" name="type" type="radio" class="radio" value="allday" {{isChecked type 'allday'}}>
+              All Day
+            </label>
+          </div>
+          <div class="row">
+            {{#if $.Session.equals 'type' "allday"}}
+            <div class="col-sm-4">
+              <input type="date" class="form-control" name="date" id="date" placeholder="YYYY-mm-dd" value="{{date}}" min="2010-01-01">
+            </div>
+            <div class="col-sm-4 form-control-static">
+              <span class="label label-default">(all day event)</span>
+            </div>
+            {{else}}
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <input type="datetime" class="form-control" name="start" id="start" placeholder="YYYY-mm-dd HH:mm" value="{{start}}" min="2010-01-01 00:00:00">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <input type="datetime" class="form-control" name="stop" id="stop" placeholder="YYYY-mm-dd HH:mm" value="{{stop}}" min="2010-01-01 00:00:00">
+            </div>
+            {{/if}}
+          </div>
         </div>
       </div>
       <div class="form-group">
         <label for="date" class="col-sm-2 control-label">Location</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="location" placeholder="eg: iHub 123 clay" value="{{location}}">
+          <input type="text" class="form-control" name="location" id="location" placeholder="eg: iHub 123 clay" value="{{location}}">
         </div>
       </div>
       <div class="form-group">
@@ -48,25 +84,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-6 text-center muted">
-        Editor
-      </div>
-      <div class="col-sm-6 text-center muted">
-        Preview
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6 ME-left">
-        <textarea id="MEbody" class="ME-textarea">{{body}}</textarea>
-      </div>
-      <div class="col-sm-6 ME-right">
-        <div id="MEpreview" class="ME-preview">
-          {{#markdown}}{{{preview}}}{{/markdown}}
-        </div>
-      </div>
-    </div>
+    {{>editor}}
 
     <div class="row">
       <div class="col-sm-5">
@@ -83,5 +101,6 @@
       </div>
     </div>
   </form>
+
   {{/with}}
 </template>
