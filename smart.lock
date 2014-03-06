@@ -10,7 +10,9 @@
       "roles": {},
       "sp-epic-editor": {},
       "filepicker": {},
-      "impicker": {}
+      "impicker": {},
+      "nprogress": {},
+      "fullcalendar": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -57,6 +59,21 @@
         "git": "https://github.com/wulx/impicker.git",
         "tag": "v1.2.0",
         "commit": "29a7a52d27b2cf8447fc24946b0fdbf60c4b12a6"
+      },
+      "nprogress": {
+        "git": "https://github.com/zhouzhuojie/meteor-nprogress.git",
+        "tag": "v0.0.3",
+        "commit": "ffd1c5dd400af64121197f4e637a215c4b6b1fc7"
+      },
+      "fullcalendar": {
+        "git": "https://github.com/TimHeckel/meteor-fullcalendar.git",
+        "tag": "v1.6.1",
+        "commit": "78dba7c564bf7baacf6556c70a3cc179d0e137c4"
+      },
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
       }
     }
   }

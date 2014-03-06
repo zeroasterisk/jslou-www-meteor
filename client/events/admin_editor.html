@@ -1,0 +1,87 @@
+<template name="events_admin_editor">
+  <h1>
+    Event Editor
+    <small><a href="/admin/events/"><i class="glyphicon glyphicon-arrow-left"></i> back to all Events</a></small>
+  </h1>
+  {{#if calevent}}
+    good
+    {{else}}
+    bad
+    {{/if}}
+  {{#with calevent}}
+
+  <form role="form" action="?" data-id="{{_id}}">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" max="64" min="8" required="required" class="form-control" id="name" placeholder="Enter Name" value="{{name}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="slug" class="col-sm-2 control-label">Slug</label>
+        <div class="col-sm-10">
+          <input type="text" max="36" min="8" required="required" class="form-control" id="slug" placeholder="url-slug-for-seo" value="{{slug}}">
+          <p class="help-block">SEO: lower case, no spaces, <em>[a-z-]</em></p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date" class="col-sm-2 control-label">Date</label>
+        <div class="col-sm-4">
+          <input type="date" class="form-control" id="date" placeholder="YYYY-mm-dd" value="{{date}}" min="2010-01-01">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="date" class="col-sm-2 control-label">Location</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="location" placeholder="eg: iHub 123 clay" value="{{location}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="isPublic" {{#if isPublic}}checked="checked"{{/if}}> Publicly Available
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 text-center muted">
+        Editor
+      </div>
+      <div class="col-sm-6 text-center muted">
+        Preview
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 ME-left">
+        <textarea id="MEbody" class="ME-textarea">{{body}}</textarea>
+      </div>
+      <div class="col-sm-6 ME-right">
+        <div id="MEpreview" class="ME-preview">
+          {{#markdown}}{{{preview}}}{{/markdown}}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-5">
+        {{>filepicker}}
+        <span class="muted">(Or drop files straight onto the editor)</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+  {{/with}}
+</template>

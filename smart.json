@@ -8,6 +8,8 @@
     "roles": {},
     "sp-epic-editor": {},
     "filepicker": {},
-    "impicker": {}
+    "impicker": {},
+    "nprogress": {},
+    "fullcalendar": {}
   }
 }
