@@ -15,3 +15,10 @@ fullcalendar
 jquery-ui
 marked
 handlebar-helpers
+/iron-router
+/moment
+/marked
+/roles
+/nprogress
+/handlebar-helpers
+/blaze-layout
