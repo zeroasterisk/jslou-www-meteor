@@ -56,12 +56,9 @@ Router.map(function() {
   // ------------------
   this.route('posts', {
     path: '/posts/',
-    before: [
-      function () {
-        this.subscribe('post', this.params.id).wait();
-      },
-      Router.BeforeWait
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('public');
+    },
     data: function() {
       return {
         posts: Posts.find()
@@ -70,13 +67,9 @@ Router.map(function() {
   });
   this.route('post', {
     path: '/posts/:id/:slug',
-    before: [
-      function () {
-        this.subscribe('post', this.params.id).wait();
-        this.subscribe('posts'); // don't wait
-      },
-      Router.BeforeWait
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('post', this.params.id);
+    },
     data: function() {
       return {
         post: Posts.findOne( this.params.id )
@@ -85,13 +78,9 @@ Router.map(function() {
   });
   this.route('posts_admin_editor', {
     path: '/admin/posts/:id',
-    before: [
-      function () {
-        this.subscribe('post', this.params.id).wait();
-        this.subscribe('posts'); // don't wait
-      },
-      Router.BeforeWait
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('post', this.params.id);
+    },
     data: function() {
       if (this.params.id == 'new') {
         return {
@@ -123,6 +112,9 @@ Router.map(function() {
   });
   this.route('posts_admin_index', {
     path: '/admin/posts',
+    waitOn: function () {
+        return Meteor.subscribe('posts');
+    },
     data: function() {
       return {
         posts: Posts.find( )
@@ -134,12 +126,9 @@ Router.map(function() {
   // ------------------
   this.route('events', {
     path: '/events/',
-    before: [
-      function () {
-        this.subscribe('events');
-      },
-      Router.BeforeWait
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('events');
+    },
     data: function() {
       return {
         calevents: Events.find( )
@@ -148,20 +137,9 @@ Router.map(function() {
   });
   this.route('event', {
     path: '/events/:id/:slug',
-    before: [
-      function () {
-        this.subscribe('event', this.params.id).wait();
-        this.subscribe('events');
-      },
-      function() {
-        if (this.ready()) {
-          NProgress.done();
-        } else {
-          NProgress.start();
-          this.stop();
-        }
-      }
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('event', this.params.id);
+    },
     data: function() {
       return {
         calevent: Events.findOne( this.params.id )
@@ -170,20 +148,9 @@ Router.map(function() {
   });
   this.route('events_admin_editor', {
     path: '/admin/events/:id',
-    before: [
-      function () {
-        this.subscribe('event', this.params.id).wait();
-        this.subscribe('events'); // don't wait
-      },
-      function() {
-        if (this.ready()) {
-          NProgress.done();
-        } else {
-          NProgress.start();
-          this.stop();
-        }
-      }
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('event', this.params.id);
+    },
     data: function() {
       if (this.params.id == 'new') {
         return {
@@ -217,19 +184,9 @@ Router.map(function() {
   });
   this.route('events_admin_index', {
     path: '/admin/events',
-    before: [
-      function () {
-        this.subscribe('events'); // don't wait
-      },
-      function() {
-        if (this.ready()) {
-          NProgress.done();
-        } else {
-          NProgress.start();
-          this.stop();
-        }
-      }
-    ],
+    waitOn: function () {
+        return Meteor.subscribe('events');
+    },
     data: function() {
       return {
         calevents: Events.find( )
@@ -237,12 +194,3 @@ Router.map(function() {
     }
   });
 });
-// we're done waiting on all subs
-Router.BeforeWait = function() {
-  if (this.ready()) {
-    NProgress.done();
-  } else {
-    NProgress.start();
-    this.stop();
-  }
-};

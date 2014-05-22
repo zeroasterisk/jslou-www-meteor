@@ -6,7 +6,7 @@
         <a href="https://github.com/zeroasterisk/jslou-www-meteor" blank="_blank">CopyLeft</a>
       </div>
       <div class="loginButtons col-sm-3">
-        {{loginButtons}}
+        {{> loginButtons}}
         {{#if isInRole 'admin'}}
           <span class="label label-info" data-toggle="tooltip" title="Admins are cool">you're an admin</span>
         {{else}}

@@ -22,12 +22,14 @@ Meteor.publish('public', function() {
 // TODO: build out a "full calender" display
 Meteor.publish('events', function() {
   return [
-    Events.find({})
+    Events.find({},
+                { fields: { _id: 1, name: 1, short: 1, date: 1 } })
   ];
 });
 Meteor.publish('posts', function() {
   return [
-    Events.find({isPublic: true})
+    Posts.find({},
+                { fields: { _id: 1, name: 1, short: 1, date: 1 } })
   ];
 });
 

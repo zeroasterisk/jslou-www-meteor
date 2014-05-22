@@ -13,18 +13,18 @@ Template.posts_admin_editor.events({
   'submit form': function(e) {
     var id = $(e.target).data('id');
     e.preventDefault();
-    var id = $(e.target).data('id');
     var data = {};
     $.each($(e.target).serializeArray(), function() {
       data[this.name] = this.value;
     });
-    if (id.length) {
+    if (id) {
       console.log('submit:update', id, data);
-      Posts.update(id, data, Template.posts_admin_editor.saveCallback);
-    } else {
-      console.log('submit:insert', id, data);
-      Posts.insert(data, Template.posts_admin_editor.saveCallback);
+      Session.set('post_id', id);
+      Posts.update(id, {$set: data}, Template.posts_admin_editor.saveCallback);
+      return false;
     }
+    console.log('submit:insert', data);
+    Posts.insert(data, Template.posts_admin_editor.saveCallback);
     return false;
   }
 });
@@ -32,7 +32,12 @@ Template.posts_admin_editor.saveCallback = function(error, results) {
   if (error) {
     return Notify.callback(error, results);
   }
-  Notify.success('Saved');
-  Router.go('/admin/posts/' + results);
+  if (_.isNumber(results)) {
+    Notify.success('Saved Update');
+    results = Session.get('post_id');
+    return Router.go('/admin/posts/' + results);
+  }
+  Notify.success('Saved Insert');
+  return Router.go('/admin/posts/' + results);
 }
 
